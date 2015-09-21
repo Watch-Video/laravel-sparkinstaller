@@ -1,0 +1,24 @@
+{
+  "name": "genealabs/laravel-sparkinstaller",
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Mike Bronner",
+          "email": "hello@genealabs.com"
+      }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/console": "^5.1"
+  },
+  "autoload": {
+    "classmap": [
+      "database/migrations",
+      "database/seeds"
+    ],
+    "psr-4": {
+      "GeneaLabs\\LaravelSparkInstaller\\": "src/",
+      "GeneaLabs\\LaravelSparkInstaller\\Tests\\": "tests/"
+    }
+  }
+}
