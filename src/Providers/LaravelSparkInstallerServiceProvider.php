@@ -1,10 +1,10 @@
-<?php namespace GeneaLabs\LaravelSparksInstaller\Providers;
+<?php namespace GeneaLabs\LaravelSparkInstaller\Providers;
 
-use GeneaLabs\LaravelSparksInstaller\Console\Commands\SparkDowngrade;
-use GeneaLabs\LaravelSparksInstaller\Console\Commands\SparkUpgrade;
+use GeneaLabs\LaravelSparkInstaller\Console\Commands\SparkDowngrade;
+use GeneaLabs\LaravelSparkInstaller\Console\Commands\SparkUpgrade;
 use Illuminate\Support\ServiceProvider;
 
-class LaravelSparksInstallerServiceProvider extends ServiceProvider
+class LaravelSparkInstallerServiceProvider extends ServiceProvider
 {
     protected $commands = [
         SparkUpgrade::class,
