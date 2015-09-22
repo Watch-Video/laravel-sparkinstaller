@@ -78,7 +78,7 @@ class SparkUpgrade extends Command
     protected function installNpmPackageConfig()
     {
         copy(
-            SPARK_PATH.'/resources/stubs/package.json',
+            base_path('vendor/laravel/spark/').'/resources/stubs/package.json',
             base_path('package.json')
         );
     }
@@ -91,7 +91,7 @@ class SparkUpgrade extends Command
     protected function installGulpFile()
     {
         copy(
-            SPARK_PATH.'/resources/stubs/gulpfile.js',
+            base_path('vendor/laravel/spark/').'/resources/stubs/gulpfile.js',
             base_path('gulpfile.js')
         );
     }
@@ -104,7 +104,7 @@ class SparkUpgrade extends Command
     protected function installServiceProviders()
     {
         copy(
-            SPARK_PATH.'/resources/stubs/app/Providers/SparkServiceProvider.php',
+            base_path('vendor/laravel/spark/').'/resources/stubs/app/Providers/SparkServiceProvider.php',
             app_path('Providers/SparkServiceProvider.php')
         );
 
@@ -120,7 +120,7 @@ class SparkUpgrade extends Command
     protected function installMiddleware()
     {
         copy(
-            SPARK_PATH.'/resources/stubs/app/Http/Middleware/Authenticate.php',
+            base_path('vendor/laravel/spark/').'/resources/stubs/app/Http/Middleware/Authenticate.php',
             app_path('Http/Middleware/Authenticate.php')
         );
 
@@ -128,14 +128,14 @@ class SparkUpgrade extends Command
 
         if (! file_exists(app_path('Http/Middleware/VerifyCsrfToken.php'))) {
             copy(
-                SPARK_PATH.'/resources/stubs/app/Http/Middleware/VerifyCsrfToken.php',
+                base_path('vendor/laravel/spark/').'/resources/stubs/app/Http/Middleware/VerifyCsrfToken.php',
                 app_path('Http/Middleware/VerifyCsrfToken.php')
             );
 
             $this->setNamespace(app_path('Http/Middleware/VerifyCsrfToken.php'));
         } else {
             $originalFile = file_get_contents(app_path('Http/Middleware/VerifyCsrfToken.php'));
-            $newFile = file_get_contents(SPARK_PATH.'/resources/stubs/app/Http/Middleware/VerifyCsrfToken.php');
+            $newFile = file_get_contents(base_path('vendor/laravel/spark/').'/resources/stubs/app/Http/Middleware/VerifyCsrfToken.php');
             $updatedMiddleware = $this->updateHidden($newFile, $originalFile);
 
             file_put_contents(app_path('Http/Middleware/VerifyCsrfToken.php'), $updatedMiddleware);
@@ -155,7 +155,7 @@ class SparkUpgrade extends Command
         );
 
         copy(
-            SPARK_PATH.'/resources/stubs/app/Http/routes.php',
+            base_path('vendor/laravel/spark/').'/resources/stubs/app/Http/routes.php',
             app_path('Http/routes.php')
         );
     }
@@ -168,7 +168,7 @@ class SparkUpgrade extends Command
     protected function installModels()
     {
         $originalUser = file_get_contents(app_path('User.php'));
-        $newUser = file_get_contents(SPARK_PATH.'/resources/stubs/app/User.php');
+        $newUser = file_get_contents(base_path('vendor/laravel/spark/').'/resources/stubs/app/User.php');
 
         $updatedUser = $this->updateHidden($newUser, $originalUser);
         $updatedUser = $this->updateDates($newUser, $updatedUser);
@@ -181,7 +181,7 @@ class SparkUpgrade extends Command
         file_put_contents(app_path('User.php'), $updatedUser);
 
         copy(
-            SPARK_PATH.'/resources/stubs/app/Team.php',
+            base_path('vendor/laravel/spark/').'/resources/stubs/app/Team.php',
             app_path('Team.php')
         );
 
@@ -196,15 +196,15 @@ class SparkUpgrade extends Command
     protected function installMigrations()
     {
         copy(
-            __DIR__ . '/../../../database/migrations/2014_10_12_000000_create_or_update_users_table_for_spark.php',
-            database_path('migrations/2014_10_12_000000_create_or_update_users_table_for_spark.php')
+            __DIR__ . '/../../../database/migrations/2014_10_12_200000_create_or_update_users_table_for_spark.php',
+            database_path('migrations/2014_10_12_200000_create_or_update_users_table_for_spark.php')
         );
 
         usleep(1000);
 
         copy(
-            __DIR__ . '/../../../database/migrations/2014_10_12_000001_create_teams_tables_for_spark.php',
-            database_path('migrations/2014_10_12_000001_create_teams_tables_for_spark.php')
+            __DIR__ . '/../../../database/migrations/2014_10_12_210000_create_teams_tables_for_spark.php',
+            database_path('migrations/2014_10_12_210000_create_teams_tables_for_spark.php')
         );
     }
 
@@ -216,7 +216,7 @@ class SparkUpgrade extends Command
     protected function installViews()
     {
         copy(
-            SPARK_PATH.'/resources/views/home.blade.php',
+            base_path('vendor/laravel/spark/').'/resources/views/home.blade.php',
             base_path('resources/views/home.blade.php')
         );
     }
@@ -251,12 +251,12 @@ class SparkUpgrade extends Command
         }
 
         copy(
-            SPARK_PATH.'/resources/stubs/resources/assets/js/app.js',
+            base_path('vendor/laravel/spark/').'/resources/stubs/resources/assets/js/app.js',
             base_path('resources/assets/js/app.js')
         );
 
         copy(
-            SPARK_PATH.'/resources/stubs/resources/assets/js/spark/components.js',
+            base_path('vendor/laravel/spark/').'/resources/stubs/resources/assets/js/spark/components.js',
             base_path('resources/assets/js/spark/components.js')
         );
     }
@@ -269,7 +269,7 @@ class SparkUpgrade extends Command
     protected function installSass()
     {
         copy(
-            SPARK_PATH.'/resources/stubs/resources/assets/sass/app.scss',
+            base_path('vendor/laravel/spark/').'/resources/stubs/resources/assets/sass/app.scss',
             base_path('resources/assets/sass/app.scss')
         );
     }
@@ -467,7 +467,7 @@ class SparkUpgrade extends Command
     protected function updateSparkServiceProviderConfig() {
         $configFile = config_path('app.php');
         $configContent = file_get_contents($configFile);
-        $updatedContent = preg_replace("/.*?SparkServiceProvider.*/", "        " . $this->namespace . "\\Providers\\SparkServiceProvider::class,", $configContent);
+        $updatedContent = preg_replace("/(.*RouteServiceProvider.*)/", "$1\n        " . $this->namespace . "\\Providers\\SparkServiceProvider::class,", $configContent);
         file_put_contents(config_path('app.php'), $updatedContent);
     }
 
