@@ -14,8 +14,7 @@
   },
   "autoload": {
     "classmap": [
-      "database/migrations",
-      "database/seeds"
+      "database/migrations"
     ],
     "psr-4": {
       "GeneaLabs\\LaravelSparkInstaller\\": "src/",
