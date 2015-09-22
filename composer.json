@@ -9,7 +9,8 @@
   ],
   "require": {
     "php": ">=5.5.9",
-    "illuminate/console": "^5.1"
+    "illuminate/console": "^5.1",
+    "laravel/spark": "0.1.1"
   },
   "autoload": {
     "classmap": [

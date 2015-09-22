@@ -18,6 +18,14 @@ class LaravelSparkInstallerServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if (! defined('SPARK_PATH')) {
+            define('SPARK_PATH', base_path('vendor/laravel/spark/'));
+        }
+
+        if (! class_exists('Spark')) {
+            class_alias('Laravel\Spark\Spark', 'Spark');
+        }
+
         $this->commands($this->commands);
     }
 }

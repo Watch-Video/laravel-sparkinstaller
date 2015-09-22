@@ -1,11 +1,16 @@
 <?php namespace GeneaLabs\LaravelSparkInstaller\Console\Commands;
 
+use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
 class SparkUpgrade extends Command
 {
+    use AppNamespaceDetectorTrait;
+
+    protected $namespace;
+
     /**
      * The name and signature of the console command.
      *
@@ -27,6 +32,8 @@ class SparkUpgrade extends Command
      */
     public function handle()
     {
+        $this->namespace = $this->getAppNamespace();
+
         $this->installNpmPackageConfig();
         $this->installGulpFile();
         $this->installServiceProviders();
@@ -102,6 +109,7 @@ class SparkUpgrade extends Command
         );
 
         $this->setNamespace(app_path('Providers/SparkServiceProvider.php'));
+        $this->updateSparkServiceProviderConfig();
     }
 
     /**
@@ -188,15 +196,15 @@ class SparkUpgrade extends Command
     protected function installMigrations()
     {
         copy(
-            SPARK_PATH.'/resources/stubs/database/migrations/2014_10_12_000000_create_or_update_users_table_for_spark.php',
+            __DIR__ . '/../../../database/migrations/2014_10_12_000000_create_or_update_users_table_for_spark.php',
             database_path('migrations/2014_10_12_000000_create_or_update_users_table_for_spark.php')
         );
 
         usleep(1000);
 
         copy(
-            SPARK_PATH.'/resources/stubs/database/migrations/2014_10_12_200000_create_teams_tables_for_spark.php',
-            database_path('migrations/2014_10_12_200000_create_teams_tables_for_spark.php')
+            __DIR__ . '/../../../database/migrations/2014_10_12_000001_create_teams_tables_for_spark.php',
+            database_path('migrations/2014_10_12_000001_create_teams_tables_for_spark.php')
         );
     }
 
@@ -352,8 +360,8 @@ class SparkUpgrade extends Command
 
 
     protected function updateHidden($newFile, $originalFile) {
-        return $this->updateFile('/protected \$appends \= \[(.*?)\]\;/sm',
-            '/(.*protected \$appends \= \[).*?(\]\;.*)/ms',
+        return $this->updateFile('/protected \$hidden \= \[(.*?)\]\;/sm',
+            '/(.*protected \$hidden \= \[).*?(\]\;.*)/ms',
             '/(class User extends.*use.*?\;\n)/ms',
             $newFile,
             $originalFile,
@@ -455,6 +463,14 @@ class SparkUpgrade extends Command
             ";"
         );
     }
+
+    protected function updateSparkServiceProviderConfig() {
+        $configFile = config_path('app.php');
+        $configContent = file_get_contents($configFile);
+        $updatedContent = preg_replace("/.*?SparkServiceProvider.*/", "        " . $this->namespace . "\\Providers\\SparkServiceProvider::class,", $configContent);
+        file_put_contents(config_path('app.php'), $updatedContent);
+    }
+
 
     /**
      * @param $newUser
