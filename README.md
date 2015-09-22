@@ -13,6 +13,7 @@ Ability to quickly add Spark to your existing Laravel 5.1 projects.
           Laravel\Spark\Providers\SparkServiceProvider::class,
           GeneaLabs\LaravelSparkInstaller\Providers\LaravelSparkInstallerServiceProvider::class,
   ```
+  
 3. **DO NOT RUN `php artisan spark:install`**, as that is meant for new installations only. Instead, run `php artisan spark:upgrade`.
 4. Run the migrations: `php artisan migrate`.
 
