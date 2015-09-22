@@ -8,7 +8,7 @@ class LaravelSparkInstallerServiceProvider extends ServiceProvider
 {
     protected $commands = [
         SparkUpgrade::class,
-        SparkDowngrade::class,
+//        SparkDowngrade::class,
     ];
 
     /**
