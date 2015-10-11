@@ -15,7 +15,14 @@ Ability to quickly add Spark to your existing Laravel 5.1 projects.
   ```
   
 3. **DO NOT RUN `php artisan spark:install`**, as that is meant for new installations only. Instead, run `php artisan spark:upgrade`.
-4. Run the migrations: `php artisan migrate`.
+4. If you didn't choose to let the upgrade process run the migrations, make any necessary changes, then run the migrations manually.: `php artisan migrate`.
+
+### Publishing Views
+Before publishing Spark views for customization, be sure to backup your `/resources/views/home.blade.php` file first, as it will get overwritten.
+Then you can publish the views as follows:
+```sh
+php artisan vendor:publish --tag=spark-full
+```
 
 ## Uninstallation
 Coming soon!
