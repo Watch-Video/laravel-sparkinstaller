@@ -92,7 +92,7 @@ class SparkUpgrade extends Command
     {
         copy(
             base_path('gulpfile.js'),
-            base_path('gulpfile.js-' . date('Y_m_d_His') . '.php')
+            base_path('gulpfile-' . date('Y_m_d_His') . '.js')
         );
 
         copy(
