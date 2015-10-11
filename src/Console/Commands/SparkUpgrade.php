@@ -91,7 +91,12 @@ class SparkUpgrade extends Command
     protected function installGulpFile()
     {
         copy(
-            base_path('vendor/laravel/spark/').'/resources/stubs/gulpfile.js',
+            base_path('gulpfile.js'),
+            base_path('gulpfile.js-' . date('Y_m_d_His') . '.php')
+        );
+
+        copy(
+            base_path('vendor/laravel/spark/') . '/resources/stubs/gulpfile.js',
             base_path('gulpfile.js')
         );
     }
