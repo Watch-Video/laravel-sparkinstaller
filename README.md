@@ -7,7 +7,7 @@ This is very much a pre-release version. As long as Laravel Spark is not stable,
 Ability to quickly add Spark to your existing Laravel 5.1 projects.
 
 ## Installation
-1. `composer require genealabs/laravel-sparkinstaller`
+1. `composer require genealabs/laravel-sparkinstaller --dev`
 2. Add the service providers:
   ```php
           Laravel\Spark\Providers\SparkServiceProvider::class,
