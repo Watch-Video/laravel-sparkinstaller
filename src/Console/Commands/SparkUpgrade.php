@@ -1,4 +1,4 @@
-<?php namespace GeneaLabsNew\LaravelSparkInstaller\Console\Commands;
+<?php namespace Watch-Video\LaravelSparkInstaller\Console\Commands;
 
 use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Console\Command;

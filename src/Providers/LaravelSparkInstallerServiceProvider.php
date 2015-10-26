@@ -1,7 +1,7 @@
-<?php namespace GeneaLabsNew\LaravelSparkInstaller\Providers;
+<?php namespace Watch-Video\LaravelSparkInstaller\Providers;
 
-use GeneaLabsNew\LaravelSparkInstaller\Console\Commands\SparkDowngrade;
-use GeneaLabsNew\LaravelSparkInstaller\Console\Commands\SparkUpgrade;
+use Watch-Video\LaravelSparkInstaller\Console\Commands\SparkDowngrade;
+use Watch-Video\LaravelSparkInstaller\Console\Commands\SparkUpgrade;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelSparkInstallerServiceProvider extends ServiceProvider
