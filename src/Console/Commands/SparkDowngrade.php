@@ -1,4 +1,4 @@
-<?php namespace GeneaLabs\LaravelSparkInstaller\Console\Commands;
+<?php namespace GeneaLabsNew\LaravelSparkInstaller\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
