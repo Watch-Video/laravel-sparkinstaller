@@ -1,5 +1,5 @@
 {
-  "name": "genealabsnew/laravel-sparkinstaller",
+  "name": "watch-video/laravel-sparkinstaller",
   "license": "MIT",
   "authors": [
       {
@@ -17,8 +17,8 @@
       "database/migrations"
     ],
     "psr-4": {
-      "GeneaLabsNew\\LaravelSparkInstaller\\": "src/",
-      "GeneaLabsNew\\LaravelSparkInstaller\\Tests\\": "tests/"
+      "Watch-Video\\LaravelSparkInstaller\\": "src/",
+      "Watch-Video\\LaravelSparkInstaller\\Tests\\": "tests/"
     }
   }
 }
